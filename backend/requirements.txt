@@ -4,11 +4,9 @@ langchain
 langchain-google-genai
 langchain-community
 langchain-classic
-langchain-huggingface
 langchain-openai
 langchain-anthropic
 langgraph
-sentence-transformers
 pandas
 openpyxl
 faiss-cpu

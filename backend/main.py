@@ -117,7 +117,8 @@ async def startup_event():
         print("Warning: GEMINI_API_KEY not set. API calls will fail.")
 
     try:
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+        embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
         vector_store = FAISS.load_local(str(index_name), embeddings, allow_dangerous_deserialization=True)
         print("Vector store initialized successfully.")
         

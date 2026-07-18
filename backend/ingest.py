@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_core.documents import Document
 from paths import FAISS_INDEX_DIR, ensure_data_directories
 
@@ -56,8 +56,8 @@ def ingest_excel(file_path: str | Path, index_name: str | Path = FAISS_INDEX_DIR
     
     print(f"Created {len(documents)} documents. Generating embeddings...")
     
-    # Initialize HuggingFace Local Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    # Initialize Google Embeddings
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
     # Create FAISS vector store
     vector_store = FAISS.from_documents(documents, embeddings)
