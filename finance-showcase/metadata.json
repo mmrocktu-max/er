@@ -1,0 +1,6 @@
+{
+  "name": "Finance Showcase",
+  "description": "An animated high-fidelity product showcase for a financial dashboard featuring smooth GSAP transitions, interactive charts, workflows, and transaction ledgers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
