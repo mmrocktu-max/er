@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from './AuthContext';
 import { ShieldCheck, Zap } from 'lucide-react';
 import { createApiClient } from './api';
@@ -37,34 +36,7 @@ function Login() {
           </p>
         </div>
 
-        {/* Glossy Capsule Wrapper for the Sign In Button */}
-        <div className="z-10 group relative rounded-full overflow-hidden p-[2px] transition-all hover:scale-105 duration-300 shadow-xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-white/40 cursor-pointer flex items-center justify-center">
-          <GoogleLogin
-            onSuccess={async (credentialResponse) => {
-              if (credentialResponse.credential) {
-                try {
-                  setError(null);
-                  const response = await createApiClient().post('/auth/login', {
-                    credential: credentialResponse.credential,
-                  });
-                  login(response.data.token, response.data.name);
-                } catch (requestError: any) {
-                  const detail = requestError?.response?.data?.detail;
-                  setError(detail || 'Sign-in could not be completed. Please try again.');
-                }
-              }
-            }}
-            onError={() => setError('Google sign-in was cancelled or failed. Please try again.')}
-            useOneTap
-            theme="filled_black"
-            shape="pill"
-            size="large"
-            text="continue_with"
-            width="250"
-          />
-        </div>
-        
-        {/* Bypass Login for local development */}
+        {/* Simple Login Button */}
         <button
           onClick={async () => {
             try {
@@ -74,12 +46,12 @@ function Login() {
               });
               login(response.data.token, response.data.name);
             } catch (err: any) {
-              setError('Bypass login failed.');
+              setError('Login failed. Ensure backend is running.');
             }
           }}
-          className="z-10 mt-4 text-xs text-gray-500 hover:text-white underline transition-colors"
+          className="z-10 group relative rounded-full overflow-hidden px-8 py-3 transition-all hover:scale-105 duration-300 shadow-[0_0_20px_rgba(139,92,246,0.3)] bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold flex items-center gap-2 cursor-pointer"
         >
-          Bypass Login (Dev Only)
+          Enter Dashboard <Zap className="w-4 h-4" />
         </button>
 
         {error && <p className="z-10 text-sm text-red-300" role="alert">{error}</p>}
